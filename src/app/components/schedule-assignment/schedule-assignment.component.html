@@ -1,0 +1,37 @@
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <div class="row">
+      <div class="col-4 mb-2">
+        <div class="form-group">
+          <label for="room_id" class="form-label mt-4">Salón: </label>
+          <input id="room_id" type="text" class="form-control" formControlName="room_id">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-2 mb-2">
+        <div class="form-group">
+          <label for="room_id" class="form-label mt-4">Desde: </label>
+          <input id="room_id" type="date" class="form-control" formControlName="from">
+        </div>
+      </div>
+      <div class="col-2 mb-2">
+        <div class="form-group">
+          <label for="room_id" class="form-label mt-4">Hasta: </label>
+          <input id="room_id" type="date" class="form-control" formControlName="to">
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-2">
+      <button type="submit" class="btn btn-primary mb-3" [disabled]="!form.valid">Submit</button>
+    </div>
+
+    <div class="col-4 mb-2">
+      <app-schedule></app-schedule>
+    </div>
+
+
+  </form>
+

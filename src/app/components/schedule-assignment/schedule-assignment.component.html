@@ -29,9 +29,13 @@
     </div>
 
     <div class="col-4 mb-2">
-      <app-schedule></app-schedule>
+      <app-schedule (notify)="setTimes($event)"></app-schedule>
     </div>
 
 
   </form>
+
+  <ul>
+    <li *ngFor="let time of times">{{time.day}}:{{time.from}}-{{time.to}}</li>
+  </ul>
 

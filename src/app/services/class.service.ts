@@ -12,6 +12,7 @@ export class ClassService {
 
   classes: Class[] = [
     {
+      id: 1,
       teacher_id: 3,
       room_id: 2,
       course_id: 1,
@@ -27,6 +28,7 @@ export class ClassService {
       ]
     },
     {
+      id: 2,
       teacher_id: 1,
       room_id: 2,
       course_id: 2,

@@ -26,7 +26,7 @@ export class TeacherService {
       name: "Paco",
       department_id: 2
     }
-  ]
+  ];
 
   constructor(private httpClient: HttpClient) { }
 

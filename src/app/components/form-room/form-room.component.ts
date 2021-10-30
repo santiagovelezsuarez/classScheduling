@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Room } from '../../models/scheduler.models';
+import { RoomInfoService } from '../../services/room-info.service';
 
 @Component({
   selector: 'app-form-room',
@@ -7,9 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormRoomComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private roomInfoService: RoomInfoService
+  ) { }
+
+  msg: string = '';
+
+  form = new FormGroup({
+    building_id: new FormControl('',[Validators.required]),
+    name: new FormControl('',[Validators.required]),
+    type: new FormControl('',[Validators.required]),
+    capacity: new FormControl('',[Validators.min(1)])
+  });
 
   ngOnInit(): void {
+  }
+
+  onSubmit(): void{
   }
 
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Validators } from '@angular/forms';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ClassDay } from '../../models/scheduler.models';
 import { ClassService } from '../../services/class.service';
@@ -19,11 +20,11 @@ export class ScheduleAssignmentComponent implements OnInit {
   msg: string = '';
 
   form = new FormGroup({
-    teacher_id: new FormControl(''),
-    room_id: new FormControl(''),
-    course_id: new FormControl(''),
-    start_date: new FormControl(''),
-    end_date:  new FormControl('')
+    teacher_id: new FormControl('',[Validators.required]),
+    room_id: new FormControl('',[Validators.required]),
+    course_id: new FormControl('',[Validators.required]),
+    start_date: new FormControl('',[Validators.required]),
+    end_date:  new FormControl('',[Validators.required])
   });
 
   setTimes(class_days: ClassDay[]){

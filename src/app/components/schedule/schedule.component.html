@@ -11,150 +11,16 @@
         <th>Sab</th>
       </tr>
     </thead>
-    <tbody>
-      <tr id="h7">
-        <td>07</td>
-        <td (click)="setTime('lun', 7)"></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+    <tbody *ngIf="classes">
+      <tr *ngFor="let t of sched; let i=index; let last = last">
+        <td>{{times[i]}}</td>
+        <td *ngFor="let d of t; let j=index" [ngClass]="{mk: d==1, mkh:d==0.5, mkhf: d==0.55}"></td>
       </tr>
-      <tr class="">
-        <td>08</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr class="">
-        <td>09</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr class="">
-        <td>10</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr class="">
-        <td>11</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr class="">
-        <td>12</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr class="">
-        <td>13</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr class="">
-        <td>14</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr class="">
-        <td>15</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr class="">
-        <td>16</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr class="">
-        <td>17</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr class="">
-        <td>18</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr class="">
-        <td>19</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr class="">
-        <td>20</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr class="">
-        <td>21</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr class="">
-        <td>22</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+    </tbody>
+    <tbody *ngIf="!classes">
+      <tr *ngFor="let t of sched; let i=index; let last = last">
+        <td>{{times[i]}}</td>
+        <td *ngFor="let d of t; let j=index" (click)="addTimes(days[j], i)" [ngClass]="{mk: d==1, mkh:d==0.5, mkhf: d==0.55}"></td>
       </tr>
     </tbody>
   </table>

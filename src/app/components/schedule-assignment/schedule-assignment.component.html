@@ -1,41 +1,84 @@
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+<div class="row">
+  <div class="col-4 mt-2">
+    <h2>Reservar Salón</h2>
 
-    <div class="row">
-      <div class="col-4 mb-2">
-        <div class="form-group">
-          <label for="room_id" class="form-label mt-4">Salón: </label>
-          <input id="room_id" type="text" class="form-control" formControlName="room_id">
-        </div>
+    <div *ngIf="msg" class="alert alert-dismissible alert-success">
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      <strong>{{ msg }}</strong>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="teacher_id" class="form-label mt-2">Docente: </label>
+        <select
+          class="form-select"
+          id="teacher_id"
+          formControlName="teacher_id"
+        >
+          <!-- <option *ngFor="let teacher of teachers" value="{{teacher.id}}">{{teacher.name}}</option> -->
+          <option value="1">Juan</option>
+          <option value="2">Pepe</option>
+        </select>
       </div>
-    </div>
 
-    <div class="row">
-      <div class="col-2 mb-2">
-        <div class="form-group">
-          <label for="room_id" class="form-label mt-4">Desde: </label>
-          <input id="room_id" type="date" class="form-control" formControlName="from">
-        </div>
+      <div class="form-group">
+        <label for="room_id" class="form-label mt-2">Aula: </label>
+        <select class="form-select" id="room_id" formControlName="room_id">
+          <!-- <option *ngFor="let room of rooms" value="{{room.id}}">{{room.name}}</option> -->
+          <option value="1">F 201</option>
+          <option value="2">16 301</option>
+        </select>
       </div>
-      <div class="col-2 mb-2">
-        <div class="form-group">
-          <label for="room_id" class="form-label mt-4">Hasta: </label>
-          <input id="room_id" type="date" class="form-control" formControlName="to">
-        </div>
+
+      <div class="form-group">
+        <label for="room_id" class="form-label mt-2">Curso: </label>
+        <select class="form-select" id="course_id" formControlName="course_id">
+          <!-- <option *ngFor="let course of courses" value="{{course.id}}">{{course.name}}</option> -->
+          <option value="1">Ingles</option>
+          <option value="2">Matematicas</option>
+        </select>
       </div>
-    </div>
 
-    <div class="mb-2">
-      <button type="submit" class="btn btn-primary mb-3" [disabled]="!form.valid">Submit</button>
-    </div>
+      <div class="form-group">
+        <label for="start_date" class="form-label mt-2">Desde: </label>
+        <input
+          id="start_date"
+          type="date"
+          class="form-control"
+          formControlName="start_date"
+        />
+      </div>
 
-    <div class="col-4 mb-2">
-      <app-schedule (notify)="setTimes($event)"></app-schedule>
-    </div>
+      <div class="form-group">
+        <label for="end_date" class="form-label mt-2">Hasta: </label>
+        <input
+          id="end_date"
+          type="date"
+          class="form-control"
+          formControlName="end_date"
+        />
+      </div>
 
+      <div class="mt-2">
+        <button
+          type="submit"
+          class="btn btn-primary mb-3"
+          [disabled]="!form.valid"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
 
-  </form>
+  <div class="col-4 mt-5">
+    <!-- <app-schedule (notify)="setTimes($event)" [classes]="[{teacher_id:5,room_id:5,course_id:3,start_date:null,end_date:null,class_days: []}]"></app-schedule> -->
+    <app-schedule (notify)="setTimes($event)"></app-schedule>
+  </div>
+</div>
 
-  <ul>
-    <li *ngFor="let time of times">{{time.day}}:{{time.from}}-{{time.to}}</li>
-  </ul>
-
+<ul>
+  <li *ngFor="let time of class_days">
+    {{ time.day }},{{ time.start_time }},{{ time.end_time }}
+  </li>
+</ul>

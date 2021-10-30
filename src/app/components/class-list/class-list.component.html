@@ -1,0 +1,8 @@
+<div class="col-4 mt-2">
+  <h2>Class - List</h2>
+  <ul class="list-group">
+    <li *ngFor="let class of classes">
+      {{ class.room_id }} : {{ class.id }} : {{ class.course?.name }}
+    </li>
+  </ul>
+</div>

@@ -10,6 +10,9 @@ import { ScheduleAssignmentComponent } from './components/schedule-assignment/sc
 import { ScheduleComponent } from './components/schedule/schedule.component';
 import { ClassListComponent } from './components/class-list/class-list.component';
 import { FormRoomComponent } from './components/form-room/form-room.component';
+import { FormTeacherComponent } from './components/form-teacher/form-teacher.component';
+import { FormCourseComponent } from './components/form-course/form-course.component';
+import { CourseListComponent } from './components/course-list/course-list.component';
 
 
 @NgModule({
@@ -19,6 +22,9 @@ import { FormRoomComponent } from './components/form-room/form-room.component';
     ScheduleComponent,
     ClassListComponent,
     FormRoomComponent,
+    FormTeacherComponent,
+    FormCourseComponent,
+    CourseListComponent,
 
   ],
   imports: [

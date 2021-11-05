@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { FormGroup, FormControl } from '@angular/forms';
-import { ClassDay } from '../../models/scheduler.models';
+import { ClassDay, Schedule, Session } from '../../models/scheduler.models';
 import { ClassService } from '../../services/class.service';
+import { Class } from 'src/app/models/scheduler.models';
 
 @Component({
   selector: 'app-schedule-assignment',
@@ -15,7 +16,10 @@ export class ScheduleAssignmentComponent implements OnInit {
     private classService: ClassService
   ) { }
 
-  class_days:ClassDay[] = [];
+
+  schedules: Schedule[] = [];
+
+  sessions: Session[] = [];
 
   msg: string = '';
 
@@ -27,17 +31,41 @@ export class ScheduleAssignmentComponent implements OnInit {
     end_date:  new FormControl('',[Validators.required])
   });
 
-  setTimes(class_days: ClassDay[]){
-    this.class_days = class_days;
+  setSessions(sessions: Session[]){
+    this.sessions = sessions;
   }
 
   ngOnInit(): void
-  { }
+  {
+    this.getClasses();
+  }
+
+  getClasses(): void {
+    this.classService.getClasses().subscribe(rs => {
+      this.schedules = this.classToSchedule(rs);
+    });
+  }
+
+  classToSchedule(cls: Class[]): Schedule[] {
+    let schedules: Schedule[] = [];
+    let sessions: Session[] = [];
+    cls.map(x => {
+      x.class_days.map(y => {
+        sessions.push({day: y.day, start_time: y.start_time, end_time: y.end_time});
+      });
+
+      schedules.push({sessions, description: x.course?.name, color: 'Coral'});
+
+      sessions = [];
+    });
+    console.log(schedules);
+    return schedules;
+  }
 
   onSubmit(): void{
     console.log("Form sche-assig: ");
     let cl = this.form.value;
-    cl.class_days = this.class_days;
+    cl.sessions = this.sessions;
     console.log(this.form.value);
 
     this.classService.createClass(cl).subscribe(

@@ -1,5 +1,5 @@
 import { Component, OnInit, Output,  EventEmitter, Input} from '@angular/core';
-import { Class, ClassDay, Days } from '../../models/scheduler.models';
+import { Session, Days, Schedule } from '../../models/scheduler.models';
 
 @Component({
   selector: 'app-schedule',
@@ -11,12 +11,17 @@ export class ScheduleComponent implements OnInit {
   days = [Days.Lun, Days.Mar, Days.Mie, Days.Jue, Days.Vie, Days.Sab];
   times = ["07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22"];
   sched = [];
+  //reservations: ClassDay[]=[];
 
-  reservations: ClassDay[]=[];
+  /* **** */
 
-  @Input() classes: Class[];
+  private sessions: Session[] = [];
 
-  @Output() notify = new EventEmitter<ClassDay[]>();
+  @Input() readonly: boolean = false;
+
+  @Input() schedules: Schedule[];
+
+  @Output() notify = new EventEmitter<Session[]>();
 
   constructor() {
     for(let i in this.times)
@@ -25,7 +30,9 @@ export class ScheduleComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.setUpSchedule();
+  }
 
   timeToSched(day,time)
   {
@@ -112,14 +119,14 @@ export class ScheduleComponent implements OnInit {
   addTimes(day, from)
   {
     this.timeToSched(day, from);
-    this.buildReservationsSchedule();
-    this.notify.emit(this.reservations);
+    this.setUpSessions();
+    this.notify.emit(this.sessions);
   }
 
-  buildReservationsSchedule()
+  setUpSessions()
   {
-    let days =["Lun", "Mar", "Mie", "Jue", "Vie", "Sab"];
-    this.reservations = [];
+    //let days =["Lun", "Mar", "Mie", "Jue", "Vie", "Sab"];
+    this.sessions = [];
     for(let day in this.days)
     {
       let first = this.getFirst(day);
@@ -127,14 +134,84 @@ export class ScheduleComponent implements OnInit {
       console.log("First: "+first);
       if(first >= 0)
       {
-        let to = this.times[last]?this.getTime(last,day, false):"23:00";
-        this.reservations.push({day: days[day], class_id: 1, start_time: this.getTime(first,day, true), end_time: to});
+        let end_time = this.times[last]?this.getTime(last,day, false):"23:00";
+        this.sessions.push({day, start_time: this.getTime(first,day, true), end_time});
       }
     }
   }
 
-  buildSchedule()
+  dayToEnum(day: string)
   {
+    switch(day){
+      case "Lun":
+        return Days.Lun;
+        break;
+      case "Mar":
+        return Days.Mar;
+        break;
+      case "Mie":
+        return Days.Mie;
+        break;
+      case "Jue":
+        return Days.Jue;
+        break;
+      case "Vie":
+        return Days.Vie;
+        break;
+      case "Sab":
+        return Days.Sab;
+        break;
+      default:
+        return -1;
+    }
+  }
 
+  sessionDurationToTimes(start, end) {
+    let itimes = [];
+    let i = this.times.indexOf(start.substr(0,start.indexOf(":")));
+    let f = this.times.indexOf(end.substr(0,end.indexOf(":")));
+    let h = end.substr(end.indexOf(":")+1) === "30" ? true : false;
+    for(i;i<f;i++)
+      itimes.push(i);
+    if(h)
+      itimes.push(f);
+    return itimes;
+  }
+
+  setUpSchedule()
+  {
+    for(let schedule of this.schedules)
+    {
+      for(let session of schedule.sessions)
+      {
+      /*
+        *TODO*
+        * day: string -> enum Days
+        * start,end time: string -> 0.5 | 0.55 | 1 && Complete()
+       */
+
+        let times = this.sessionDurationToTimes(session.start_time, session.end_time);
+        for (let time of times)
+        {
+          this.sched[time][this.dayToEnum(session.day)] = 1;// jue to 3
+        }
+
+        let h = session.start_time.substr(session.start_time.indexOf(":")+1) === "30" ? true : false;
+        if(h)
+          this.sched[times[0]][this.dayToEnum(session.day)] = 0.55;
+        h = session.end_time.substr(session.end_time.indexOf(":")+1) === "30" ? true : false;
+        if(h)
+          this.sched[times[times.length-1]][this.dayToEnum(session.day)] = 0.5;
+
+
+
+
+      // session.day;
+      // session.start_time;
+      // session.end_time;
+
+      // this.sched[][];
+      }
+    }
   }
 }

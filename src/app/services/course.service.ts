@@ -35,6 +35,6 @@ export class CourseService {
 
   getCourse(id:number):Observable<Course>
   {
-    return of(this.courses[id]);
+    return of(this.courses[id-1]);
   }
 }

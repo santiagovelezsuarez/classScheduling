@@ -2,7 +2,7 @@
   <h2>Class - List</h2>
   <ul class="list-group">
     <li *ngFor="let class of classes">
-      {{ class.room_id }} : {{ class.id }} : {{ class.course?.name }}
+      Room_Id: {{ class.room_id }}, Room: {{ class.room.name }},  Class_Id: {{ class.id }}, Course_Id: {{ class.course_id }}, Course: {{ class.course?.name }}
     </li>
   </ul>
 </div>

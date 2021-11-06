@@ -36,11 +36,16 @@ export class ScheduleComponent implements OnInit {
 
   timeToSched(day,time)
   {
-    if(this.sched[time][day]==1 && this.sched[time-1][day])
+    let atime = time -1;
+    if(atime<0)
+    {
+      atime = 0;
+    }
+    if(this.sched[time][day]==1 && this.sched[atime][day])
     {
       this.sched[time][day]=0.5;
     }
-    else if(this.sched[time][day]==1 && !this.sched[time-1][day])
+    else if(this.sched[time][day]==1 && !this.sched[atime][day])
     {
       this.sched[time][day]=0.55;
     }

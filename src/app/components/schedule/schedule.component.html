@@ -11,16 +11,16 @@
         <th>Sab</th>
       </tr>
     </thead>
-    <tbody *ngIf="classes">
+    <tbody *ngIf="readonly">
       <tr *ngFor="let t of sched; let i=index; let last = last">
         <td>{{times[i]}}</td>
         <td *ngFor="let d of t; let j=index" [ngClass]="{mk: d==1, mkh:d==0.5, mkhf: d==0.55}"></td>
       </tr>
     </tbody>
-    <tbody *ngIf="!classes">
+    <tbody *ngIf="!readonly">
       <tr *ngFor="let t of sched; let i=index; let last = last">
         <td>{{times[i]}}</td>
-        <td *ngFor="let d of t; let j=index" (click)="addTimes(days[j], i)" [ngClass]="{mk: d==1, mkh:d==0.5, mkhf: d==0.55}"></td>
+        <td *ngFor="let d of t; let j=index" (click)="addTimes(j, i)" [ngClass]="{mk: d==1, mkh:d==0.5, mkhf: d==0.55}"></td>
       </tr>
     </tbody>
   </table>

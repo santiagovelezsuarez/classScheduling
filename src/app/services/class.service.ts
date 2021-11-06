@@ -22,8 +22,8 @@ export class ClassService {
         {
           day: "Lun",
           class_id: 1,
-          start_time: "10:00",
-          end_time: "12:00"
+          start_time: "10:30",
+          end_time: "12:30"
         }
       ]
     },

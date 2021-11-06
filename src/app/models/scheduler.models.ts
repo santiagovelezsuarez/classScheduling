@@ -55,6 +55,18 @@ export interface ClassDay{
   start_time: string;
   end_time: string;
 }
+/* ******** */
+export interface Session{
+  day: string;
+  start_time: string;
+  end_time: string;
+}
+
+export interface Schedule{
+  sessions: Session[];
+  description?: string;
+  color?: string;
+}
 
 export enum Days{
   Lun,

@@ -45,7 +45,9 @@ export class ClassService {
     }
   ];
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(
+    private httpClient: HttpClient
+  ) { }
 
   createClass(_class: Class):Observable<Number>
   {

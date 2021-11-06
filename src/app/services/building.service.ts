@@ -21,6 +21,8 @@ export class BuildingService {
     }
   ];
 
+  constructor(private httpClient: HttpClient) { }
+
   createBuilding(building: Building):Observable<Number>
   {
     return of(this.buildings.push(building));
@@ -33,8 +35,8 @@ export class BuildingService {
 
   getBuilding(id:number):Observable<Building>
   {
-    return of(this.buildings[id]);
+    return of(this.buildings[id-1]);
   }
 
-  constructor(private httpClient: HttpClient) { }
+
 }

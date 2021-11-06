@@ -59,4 +59,9 @@ export class ClassService {
     return of(this.classes);
   }
 
+  getClass(id:number):Observable<Class>
+  {
+    return of(this.classes[id-1]);
+  }
+
 }

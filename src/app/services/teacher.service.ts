@@ -42,6 +42,6 @@ export class TeacherService {
 
   getTeacher(id:number):Observable<Teacher>
   {
-    return of(this.teachers[id]);
+    return of(this.teachers[id-1]);
   }
 }

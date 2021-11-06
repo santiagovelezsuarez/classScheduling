@@ -48,6 +48,6 @@ export class RoomInfoService {
 
   getRoom(id:number):Observable<Room>
   {
-    return of(this.rooms[id]);
+    return of(this.rooms[id-1]);
   }
 }

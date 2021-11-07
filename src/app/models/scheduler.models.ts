@@ -68,7 +68,7 @@ export interface Schedule{
   color?: string;
 }
 
-export enum Days{
+export enum Days {
   Lun,
   Mar,
   Mie,
@@ -76,4 +76,14 @@ export enum Days{
   Vie,
   Sab,
   Dom
+}
+
+export const DAY: string[] = ["LUN","MAR","MIE","JUE","VIE","SAB","DOM"];
+
+export enum Cell {
+  FREE,
+  FULL,
+  IHALF,
+  FHALF,
+  BUSY
 }

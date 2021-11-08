@@ -3,7 +3,7 @@
   <ul class="list-group">
     <li *ngFor="let class of classes">
       Room_Id: {{ class.room_id }}, Room: {{ class.room?.name }},  Class_Id: {{ class.id }}, Course_Id: {{ class.course_id }}, Course: {{ class.course?.name }}
-      <p *ngFor="let session of class.class_days">{{ session.day }}: {{ session.start_time }} - {{ session.end_time }}</p>
+      <p *ngFor="let session of class.class_days">{{ session.day }}: {{ session.times }}</p>
     </li>
   </ul>
 </div>

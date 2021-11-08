@@ -15,27 +15,21 @@
           id="teacher_id"
           formControlName="teacher_id"
         >
-          <!-- <option *ngFor="let teacher of teachers" value="{{teacher.id}}">{{teacher.name}}</option> -->
-          <option value="1">Juan</option>
-          <option value="2">Pepe</option>
+          <option *ngFor="let teacher of teachers" value="{{teacher.id}}">{{teacher.name}}</option>
         </select>
       </div>
 
       <div class="form-group">
         <label for="room_id" class="form-label mt-2">Aula: </label>
-        <select class="form-select" id="room_id" formControlName="room_id">
-          <!-- <option *ngFor="let room of rooms" value="{{room.id}}">{{room.name}}</option> -->
-          <option value="1">F 201</option>
-          <option value="2">16 301</option>
+        <select class="form-select" id="room_id" formControlName="room_id" (change)='onRoomChange($event)'>
+          <option *ngFor="let room of rooms" value="{{room.id}}">{{room.name}}</option>
         </select>
       </div>
 
       <div class="form-group">
         <label for="room_id" class="form-label mt-2">Curso: </label>
         <select class="form-select" id="course_id" formControlName="course_id">
-          <!-- <option *ngFor="let course of courses" value="{{course.id}}">{{course.name}}</option> -->
-          <option value="1">Ingles</option>
-          <option value="2">Matematicas</option>
+          <option *ngFor="let course of courses" value="{{course.id}}">{{course.name}}</option>
         </select>
       </div>
 
@@ -74,12 +68,12 @@
   <div class="col-4 mt-5">
     <!-- <app-schedule (notify)="setTimes($event)" [classes]="[{teacher_id:5,room_id:5,course_id:3,start_date:null,end_date:null,class_days: []}]"></app-schedule> -->
     <!-- <app-schedule (notify)="setSessions($event)" [schedules]="schedules"></app-schedule> -->
-    <app-schedule></app-schedule>
+    <app-schedule (notify)="setSessions($event)" [schedules]="schedules"></app-schedule>
   </div>
 </div>
 
 <ul>
   <li *ngFor="let session of sessions">
-    {{ session.day }},{{ session.start_time }},{{ session.end_time }}
+    {{ session.day }},{{ session.times }}
   </li>
 </ul>

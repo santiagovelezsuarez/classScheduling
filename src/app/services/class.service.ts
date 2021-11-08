@@ -20,10 +20,8 @@ export class ClassService {
       end_date: new Date("2019-05-16"),
       class_days: [
         {
-          day: "Lun",
-          class_id: 1,
-          start_time: "10:30",
-          end_time: "12:30"
+          day: 1,
+          times: [8,8.5,9,9.5]
         }
       ]
     },
@@ -36,27 +34,56 @@ export class ClassService {
       end_date: new Date("2019-05-16"),
       class_days: [
         {
-          day: "Jue",
-          class_id: 2,
-          start_time: "16:00",
-          end_time: "18:00"
+          day: 3,
+          times: [9,9.5,10]
         }
       ]
     }
   ];
 
+  /*{
+    "teacher_id": "1",
+    "room_id": "1",
+    "course_id": "1",
+    "start_date": "2021-11-02",
+    "end_date": "2021-11-17",
+    "sessions": [
+      {
+        "day": 0,
+        "times": [
+          8
+        ]
+      }
+    ],
+    "id": 3
+  }*/
+
   constructor(
     private httpClient: HttpClient
   ) { }
 
+  generateId(): number
+  {
+    let current = this.classes.length;
+    return ++current;
+  }
+
   createClass(_class: Class):Observable<Number>
   {
+    _class.id = this.generateId();
+    console.log("Class Service: ",_class);
     return of(this.classes.push(_class));
   }
 
   getClasses():Observable<Class[]>
   {
+    console.log("getClasses: ",this.classes);
     return of(this.classes);
+  }
+
+  getClassesByRoom(room_id:number):Observable<Class[]>
+  {
+    return of(this.classes.filter(x => x.room_id == room_id));
   }
 
   getClass(id:number):Observable<Class>

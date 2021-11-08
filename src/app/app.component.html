@@ -8,12 +8,12 @@
     <div class="collapse navbar-collapse" id="navbarColor02">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link active" href="#">Home
+          <a class="nav-link active" [routerLink]="['/reservate-room']">Home
             <span class="visually-hidden">(current)</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link"[routerLink]="['/class-list']">Clases</a>
+          <a class="nav-link" [routerLink]="['/class-list']">Clases</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Pricing</a>
@@ -31,6 +31,4 @@
 </nav>
 <div class="container">
   <router-outlet></router-outlet>
-  <app-schedule-assignment></app-schedule-assignment>
-  <app-class-list></app-class-list>
 </div>

@@ -2,16 +2,12 @@ td,th{
   border:1px solid white;
 }
 
-td + .mk{
+td.mk{
   background-color: coral;
 }
 
-td + .mkh{
-  background: linear-gradient(0deg, #20374c 50% , coral 50%);
-}
-
-td + .mkhf{
-  background: linear-gradient(0deg,coral 50%,  #20374c 50%);
+td.mkb{
+  background-color: olive;
 }
 
 .hora{

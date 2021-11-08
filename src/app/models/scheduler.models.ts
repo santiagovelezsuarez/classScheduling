@@ -50,16 +50,14 @@ export interface Class {
 }
 
 export interface ClassDay{
-  day: string;
-  class_id: number;
-  start_time: string;
-  end_time: string;
+  class_id?: number;
+  day: number;
+  times: number[];
 }
 /* ******** */
 export interface Session{
-  day: string;
-  start_time: string;
-  end_time: string;
+  day: number;
+  times: number[];
 }
 
 export interface Schedule{
@@ -83,7 +81,5 @@ export const DAY: string[] = ["LUN","MAR","MIE","JUE","VIE","SAB","DOM"];
 export enum Cell {
   FREE,
   FULL,
-  IHALF,
-  FHALF,
   BUSY
 }

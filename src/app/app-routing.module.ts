@@ -4,6 +4,7 @@ import { ClassListComponent } from './components/class-list/class-list.component
 import { ScheduleAssignmentComponent } from './components/schedule-assignment/schedule-assignment.component';
 
 const routes: Routes = [
+  { path: '', component: ScheduleAssignmentComponent },
   { path: 'class-list', component: ClassListComponent },
   { path: 'reservate-room', component: ScheduleAssignmentComponent }
 ];

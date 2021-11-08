@@ -18,6 +18,10 @@ export class CourseService {
     {
       id: 2,
       name: "Matematicas"
+    },
+    {
+      id: 2,
+      name: "Fisica"
     }
   ];
 

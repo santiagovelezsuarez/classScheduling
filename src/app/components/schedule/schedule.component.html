@@ -6,16 +6,23 @@
       </tr>
     </thead>
     <tbody *ngIf="readonly">
-      <tr *ngFor="let time of cells[0]; let i = index">
-        <td>{{ nTime(i) }}</td>
-        <td *ngFor="let day of cells">0</td>
+      <tr *ngFor="let time of cells[0]; let j = index">
+        <td *ngIf="j%2==0" rowspan="2">{{ nTime(j) }}</td>
+        <td *ngFor="let day of cells; let i = index" [ngClass]="{mkb: cells[i][j]==Cell.BUSY, mk: cells[i][j]==Cell.FULL}">{{ cells[i][j] }}</td>
       </tr>
     </tbody>
     <tbody *ngIf="!readonly">
       <tr *ngFor="let time of cells[0]; let j = index">
-        <td>{{ nTime(j) }}</td>
-        <td *ngFor="let day of cells; let i = index" (click)="onCellClick(i, j)">{{ cells[i][j] }}</td>
+        <td *ngIf="j%2==0" rowspan="2">{{ nTime(j) }}</td>
+        <td *ngFor="let day of cells; let i = index" (click)="onCellClick(i, j)" [ngClass]="{mkb: cells[i][j]==Cell.BUSY, mk: cells[i][j]==Cell.FULL}">{{ cells[i][j] }}</td>
       </tr>
     </tbody>
   </table>
+</div>
+
+<h1>Sessions: </h1>
+<div>
+  <ul>
+    <li *ngFor="let session of sessions">{{ session.day }} - {{ session.times }}</li>
+  </ul>
 </div>

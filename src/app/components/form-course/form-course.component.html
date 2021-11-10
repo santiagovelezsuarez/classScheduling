@@ -1,1 +1,15 @@
-<p>form-course works!</p>
+<div class="col-6 mt-4">
+  <h2>Crear Curso</h2>
+  <form [formGroup]="formCourse" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name" class="form-label mt-1">Name</label>
+      <input type="text" class="form-control" id="name" formControlName="name" required>
+    </div>
+    <div class="mt-2">
+      <button type="submit" class="btn btn-primary mb-3" [disabled]="!formCourse.valid">Submit</button>
+    </div>
+  </form>
+  <div *ngIf="msg" class="alert alert-success" role="alert">
+    {{msg}}
+  </div>
+</div>

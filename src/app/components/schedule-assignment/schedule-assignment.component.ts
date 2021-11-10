@@ -28,7 +28,10 @@ export class ScheduleAssignmentComponent implements OnInit {
 
   courses: Course[] = [];
 
+  // Classes
   schedules: Schedule[] = [];
+
+  classes : Class[] = [];
 
   sessions: Session[] = [];
 
@@ -57,10 +60,28 @@ export class ScheduleAssignmentComponent implements OnInit {
   {
     console.log("room");
     console.log(room.target.value);
-    this.classService.getClassesByRoom(room.target.value).subscribe(
+    console.log(room);
+    let idate = (<HTMLInputElement>document.getElementById("start_date")).value;
+    let fdate = (<HTMLInputElement>document.getElementById("end_date")).value;
+    this.classService.getClassesByRoomInDate(room.target.value, new Date(idate), new Date(fdate)).subscribe(
       x => {
         console.log(x);
-        this.schedules = this.classToSchedule(x);
+        //this.schedules = this.classToSchedule(x);
+        this.classes = x;
+      }
+    );
+  }
+
+  onDateChange()
+  {
+    let room = (<HTMLInputElement>document.getElementById("room_id")).value;
+    let idate = (<HTMLInputElement>document.getElementById("start_date")).value;
+    let fdate = (<HTMLInputElement>document.getElementById("end_date")).value;
+    this.classService.getClassesByRoomInDate(+room, new Date(idate), new Date(fdate)).subscribe(
+      x => {
+        console.log(x);
+        //this.schedules = this.classToSchedule(x);
+        this.classes = x;
       }
     );
   }
@@ -72,12 +93,14 @@ export class ScheduleAssignmentComponent implements OnInit {
     this.courseService.getCourses().subscribe(rs => this.courses = rs);
   }
 
+  /*
   getClasses(): void {
     this.classService.getClasses().subscribe(rs => {
-      this.schedules = this.classToSchedule(rs);
+      //this.schedules = this.classToSchedule(rs);
     });
-  }
+  }*/
 
+  /*
   classToSchedule(cls: Class[]): Schedule[] {
     let schedules: Schedule[] = [];
     let sessions: Session[] = [];
@@ -93,7 +116,7 @@ export class ScheduleAssignmentComponent implements OnInit {
     console.log("schedules");
     console.log(schedules);
     return schedules;
-  }
+  }*/
 
   onSubmit(): void{
     console.log("Form sche-assig: ");

@@ -66,6 +66,20 @@ export interface Schedule{
   color?: string;
 }
 
+export interface SCell {
+  value: Cell;
+  description: string;
+  color: string;
+}
+
+export enum RoomType {
+  P = "P",
+  Q = "Q",
+  R = "R",
+  S = "S",
+  T = "T"
+}
+
 export enum Days {
   Lun,
   Mar,

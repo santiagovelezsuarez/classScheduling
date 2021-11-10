@@ -1,4 +1,4 @@
-<div class="col-4 mt-2">
+<!-- <div class="col-4 mt-2">
   <h2>Class - List</h2>
   <ul class="list-group">
     <li *ngFor="let class of classes">
@@ -6,4 +6,31 @@
       <p *ngFor="let session of class.class_days">{{ session.day }}: {{ session.times }}</p>
     </li>
   </ul>
+</div> -->
+
+<div class="col-8 mt-4">
+  <div class="col-4 mt-2">
+    <input class="form-control form-control-lg sc listmov" type="text" placeholder="Search" [(ngModel)]="text" (keyup)="search()">
+  </div>
+  <table class="table table-dark table-striped mt-2">
+    <tr>
+      <td>Id</td>
+      <td>Curso</td>
+      <td>Docente</td>
+      <td>Horario</td>
+      <td>Aula</td>
+      <td>Grupo</td>
+      <td>Fecha Terminación</td>
+    </tr>
+    <tr *ngFor="let class of filter">
+      <td>{{ class.course.id }}</td>
+      <td>{{ class.course.name }}</td>
+      <td>{{ class.teacer.name }}</td>
+      <!-- <td><p *ngFor="let h of class.class_days">{{ h.day }}-{{ h.times }}</p></td> -->
+      <td><p *ngFor="let h of class.class_days">{{ h | classDayToString }}</p></td>
+      <td>{{ class.room.name }}</td>
+      <td>{{ class.id }}</td>
+      <td>{{ class.end_date | date }}</td>
+    </tr>
+  </table>
 </div>

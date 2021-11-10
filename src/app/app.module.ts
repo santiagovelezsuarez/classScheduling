@@ -13,6 +13,9 @@ import { FormRoomComponent } from './components/form-room/form-room.component';
 import { FormTeacherComponent } from './components/form-teacher/form-teacher.component';
 import { FormCourseComponent } from './components/form-course/form-course.component';
 import { CourseListComponent } from './components/course-list/course-list.component';
+import { ClassToSchedulePipe } from './pipes/class-to-schedule.pipe';
+import { ClassDayToStringPipe } from './pipes/class-day-to-string.pipe';
+import { EnumToArrayPipe } from './pipes/enum-to-array.pipe';
 
 
 @NgModule({
@@ -25,6 +28,9 @@ import { CourseListComponent } from './components/course-list/course-list.compon
     FormTeacherComponent,
     FormCourseComponent,
     CourseListComponent,
+    ClassToSchedulePipe,
+    ClassDayToStringPipe,
+    EnumToArrayPipe,
 
   ],
   imports: [

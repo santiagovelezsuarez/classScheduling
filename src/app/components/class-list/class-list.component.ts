@@ -13,7 +13,8 @@ import { RoomInfoService } from '../../services/room-info.service';
 export class ClassListComponent implements OnInit {
 
   classes: Class[] = [];
-
+  filter: Class[] = [];
+  text: string = "";
 
   constructor(
     private classService: ClassService,
@@ -36,7 +37,13 @@ export class ClassListComponent implements OnInit {
           this.teacherService.getTeacher(classs.teacher_id).subscribe(rs => classs.teacer = rs);
           this.roomInfoService.getRoom(classs.room_id).subscribe(rs => classs.room = rs);
         }
+        this.filter = this.classes;
     });
+  }
+
+  search()
+  {
+    this.filter = this.classes.filter(x => x.course.name.toLowerCase().includes(this.text.toLowerCase() ));
   }
 
 }

@@ -16,7 +16,7 @@ export class FormCourseComponent implements OnInit {
 
   msg: string = '';
 
-  form = new FormGroup({
+  formCourse = new FormGroup({
     name: new FormControl('',[Validators.required])
   });
 

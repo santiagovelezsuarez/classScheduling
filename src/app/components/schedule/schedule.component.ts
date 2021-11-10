@@ -1,5 +1,5 @@
 import { Component, OnInit, Output,  EventEmitter, Input} from '@angular/core';
-import { Session, Days, Schedule, Cell, DAY } from '../../models/scheduler.models';
+import { Session, Days, Schedule, Cell, DAY, SCell } from '../../models/scheduler.models';
 
 @Component({
   selector: 'app-schedule',
@@ -11,13 +11,15 @@ export class ScheduleComponent implements OnInit {
 
   @Input() readonly: boolean = false;
 
+  @Input() horizontal: boolean = true;
+
   @Input() iTime: number = 7;
 
-  @Input() fTime: number = 11;
+  @Input() fTime: number = 22;
 
   @Input() iDay: Days = Days.Lun;
 
-  @Input() fDay: Days = Days.Mie;
+  @Input() fDay: Days = Days.Sab;
 
   // @Input() schedules: Schedule[] = [];
   private _schedules: Schedule[] = [];
@@ -32,7 +34,7 @@ export class ScheduleComponent implements OnInit {
 
   Cell = Cell;
 
-  cells: number[][] = [];
+  cells: SCell[][] = [];
 
   tHead: string[] = ["Hora"];
 
@@ -45,7 +47,7 @@ export class ScheduleComponent implements OnInit {
       for(let time = 0; time< ((this.fTime-this.iTime)+1)*2; time++)
       {
         //console.log(time);
-        this.cells[day][time] = Cell.FREE;
+        this.cells[day][time] = {value: Cell.FREE, description: ".", color: ""};
       }
     }
   }
@@ -65,9 +67,12 @@ export class ScheduleComponent implements OnInit {
 
   onCellClick(i,j)
   {
-    this.cells[i][j] = this.changeCellValue(this.cells[i][j]);
-    //this.changeCellValue2(i,j);
-    this.notifySessions();
+    if(this.cells[i][j].value!=Cell.BUSY)
+    {
+      this.cells[i][j].value = this.changeCellValue(this.cells[i][j].value);
+      //this.changeCellValue2(i,j);
+      this.notifySessions();
+    }
   }
 
   private changeCellValue(cell)
@@ -82,12 +87,12 @@ export class ScheduleComponent implements OnInit {
     this.sessions = [];
     for(let day=0; day<this.cells.length; day++)
     {
-      console.log(DAY[day]);
+      //console.log(DAY[day]);
       let times: number[] = [];
       for(let time=0; time<this.cells[0].length; time++)
       {
-        console.log(this.cells[day][time]);
-        if(this.cells[day][time] === Cell.FULL)
+        //console.log(this.cells[day][time]);
+        if(this.cells[day][time].value === Cell.FULL)
         {
           times.push(time/2+this.iTime);
         }
@@ -100,16 +105,32 @@ export class ScheduleComponent implements OnInit {
   }
 
   drawSessions()
-  {console.log("Sessions: ");
-  this.cells[2][2] = Cell.FREE;
+  {
+    this.cleanCells();
+    //console.log("Sessions: ");
     for(let schedule of this._schedules)
-    {
+    {console.log("_Schedules: ",schedule)
+      let desc = schedule.description;
+      let color = schedule.color;
       for(let session of schedule.sessions)
       {
-        console.log(session);
-        this.cells[2][2] = Cell.BUSY;
+        //console.log(session);
+        //this.cells[2][2] = Cell.BUSY;
+        for(let time of session.times)
+        {
+          this.cells[session.day][(time-this.iTime)*2].value = Cell.BUSY;
+          this.cells[session.day][(time-this.iTime)*2].description = desc;
+
+        }
       }
     }
+  }
+
+  cleanCells() {
+    this.cells = this.cells.map(
+      cell => cell.map(x => x.value!=Cell.FREE?{value: Cell.FREE, description: ".", color: x.color}:x)
+    );
+    this.notifySessions();
   }
 
 

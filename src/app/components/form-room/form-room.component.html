@@ -1,1 +1,31 @@
-<p>form-room works!</p>
+<div class="col-6 mt-4">
+  <h2>Crear Aula</h2>
+  <form [formGroup]="formRoom" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name" class="form-label mt-1">Bloque</label>
+      <select class="form-select" id="building_id" formControlName="building_id">
+        <option *ngFor="let bld of buildings" value="{{bld.id}}">{{bld.name}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="name" class="form-label mt-1">Nombre</label>
+      <input type="text" class="form-control" id="name" formControlName="name" required>
+    </div>
+    <div class="form-group">
+      <label for="name" class="form-label mt-1">Tipo</label>
+      <select class="form-select" id="type" formControlName="type">
+        <option *ngFor="let rt of RoomType | enumToArray" value="{{rt}}">{{rt}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="name" class="form-label mt-1">Capacidad</label>
+      <input type="number" min="1" class="form-control" id="capacity" formControlName="capacity" required>
+    </div>
+    <div class="mt-2">
+      <button type="submit" class="btn btn-primary mb-3" [disabled]="!formRoom.valid">Submit</button>
+    </div>
+  </form>
+  <div *ngIf="msg" class="alert alert-success" role="alert">
+    {{msg}}
+  </div>
+</div>

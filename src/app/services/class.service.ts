@@ -150,6 +150,8 @@ export class ClassService {
     return of(schedule);
   }
 
+
+
   getClass(id:number):Observable<Class>
   {
     return of(this.classes[id-1]);

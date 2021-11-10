@@ -13,13 +13,15 @@ export class ScheduleComponent implements OnInit {
 
   @Input() horizontal: boolean = true;
 
-  @Input() iTime: number = 7;
+  @Input() iTime: number = 8;
 
-  @Input() fTime: number = 22;
+  @Input() fTime: number = 20;
+
+  @Input() cellsPerHour = 8;
 
   @Input() iDay: Days = Days.Lun;
 
-  @Input() fDay: Days = Days.Sab;
+  @Input() fDay: Days = Days.Vie;
 
   // @Input() schedules: Schedule[] = [];
   private _schedules: Schedule[] = [];
@@ -44,7 +46,7 @@ export class ScheduleComponent implements OnInit {
     {
       this.tHead.push(DAY[day+this.iDay]);
       this.cells[day] = [];
-      for(let time = 0; time< ((this.fTime-this.iTime)+1)*2; time++)
+      for(let time = 0; time< ((this.fTime-this.iTime)+1)*this.cellsPerHour; time++)
       {
         //console.log(time);
         this.cells[day][time] = {value: Cell.FREE, description: ".", color: ""};
@@ -52,12 +54,13 @@ export class ScheduleComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {this.drawSessions();
+  ngOnInit(): void {
+    this.drawSessions();
   }
 
   nTime(i:number)
   {
-    let t = i/2+this.iTime;
+    let t = i/this.cellsPerHour+this.iTime;
     let ft = t>12?(t-12)+" PM":t+" AM";
     ft = t==12?t+" PM":ft;
     ft = t==24?"12 AM":ft;
@@ -94,7 +97,7 @@ export class ScheduleComponent implements OnInit {
         //console.log(this.cells[day][time]);
         if(this.cells[day][time].value === Cell.FULL)
         {
-          times.push(time/2+this.iTime);
+          times.push(time/this.cellsPerHour+this.iTime);
         }
 
       }
@@ -118,9 +121,8 @@ export class ScheduleComponent implements OnInit {
         //this.cells[2][2] = Cell.BUSY;
         for(let time of session.times)
         {
-          this.cells[session.day][(time-this.iTime)*2].value = Cell.BUSY;
-          this.cells[session.day][(time-this.iTime)*2].description = desc;
-
+          this.cells[session.day][(time-this.iTime)*this.cellsPerHour].value = Cell.BUSY;
+          this.cells[session.day][(time-this.iTime)*this.cellsPerHour].description = desc;
         }
       }
     }

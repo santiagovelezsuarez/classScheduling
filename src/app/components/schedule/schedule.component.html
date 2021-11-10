@@ -13,7 +13,7 @@
     </tbody>
     <tbody *ngIf="!readonly">
       <tr *ngFor="let time of cells[0]; let j = index">
-        <td *ngIf="j%2==0" rowspan="2">{{ nTime(j) }}</td>
+        <td *ngIf="j%cellsPerHour==0" [rowSpan]="cellsPerHour">{{ nTime(j) }}</td>
         <td *ngFor="let day of cells; let i = index"
             (click)="onCellClick(i, j)"
             [ngClass]="{mkb: cells[i][j].value==Cell.BUSY, mk: cells[i][j].value==Cell.FULL}"
@@ -30,7 +30,7 @@
     <tr *ngFor="let title of tHead; let i = index">
       <td>{{ title }}</td>
       <ng-template ngFor let-item [ngForOf]="cells[0]" let-j="index">
-        <td *ngIf="i==0 && j%2==0" colspan="2">{{ nTime(j) }}</td>
+        <td *ngIf="i==0 && j%cellsPerHour==0" [colSpan]="cellsPerHour">{{ nTime(j) }}</td>
         <td *ngIf="i>0" [ngClass]="{mkb: cells[i-1][j].value==Cell.BUSY, mk: cells[i-1][j].value==Cell.FULL}">{{ cells[i-1][j].description }}</td>
       </ng-template>
       <!-- <td *ngFor="let time of cells[0]; let j = index;"><div *ngIf="i == 0 && j%2==0">{{ nTime(j) }}</div></td> -->

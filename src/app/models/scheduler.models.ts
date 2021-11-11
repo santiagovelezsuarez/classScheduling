@@ -52,12 +52,18 @@ export interface Class {
 export interface ClassDay{
   class_id?: number;
   day: number;
-  times: number[];
+  times: timeInterval[];
 }
+
+export interface timeInterval {
+  itime: number;
+  ftime: number;
+}
+
 /* ******** */
 export interface Session{
   day: number;
-  times: number[];
+  times: timeInterval[];
 }
 
 export interface Schedule{

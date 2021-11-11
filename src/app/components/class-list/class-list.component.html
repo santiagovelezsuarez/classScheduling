@@ -24,13 +24,21 @@
     </tr>
     <tr *ngFor="let class of filter">
       <td>{{ class.course.id }}</td>
-      <td>{{ class.course.name }}</td>
+      <td><span class="badge bg-secondary">{{ class.course.name }}</span></td>
       <td>{{ class.teacer.name }}</td>
       <!-- <td><p *ngFor="let h of class.class_days">{{ h.day }}-{{ h.times }}</p></td> -->
-      <td><p *ngFor="let h of class.class_days">{{ h | classDayToString }}</p></td>
+      <td>
+        <p *ngFor="let h of class.class_days">
+          {{ Day[h.day] }}
+          <span class="badge bg-light text-dark" *ngFor="let t of h.times">
+            |{{ t.itime*3600000 | date:'H:mm':'UTC' }} - {{ t.ftime*3600000 | date:'H:mm':'UTC' }}|
+          </span>
+        </p>
+      </td>
       <td>{{ class.room.name }}</td>
       <td>{{ class.id }}</td>
       <td>{{ class.end_date | date }}</td>
     </tr>
   </table>
+  <label>{{ 5.5*3600000 | date:'H:mm':'UTC'}}</label>
 </div>

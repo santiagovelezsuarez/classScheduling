@@ -23,7 +23,7 @@ export class ClassService {
       class_days: [
         {
           day: 0,
-          times: [8,8.5,9,9.5] // Lun 8 - 10
+          times: [{itime: 8, ftime:10},{itime: 17.5, ftime: 19.5}] // Lun 8 - 10 , 17 - 19:30
         }
       ]
     },
@@ -37,7 +37,7 @@ export class ClassService {
       class_days: [
         {
           day: 2,
-          times: [9,9.5,10] // Mie 9 - 10.30
+          times: [{itime: 9, ftime: 10.5}] // Mie 9 - 10:30
         }
       ]
     },
@@ -51,11 +51,11 @@ export class ClassService {
       class_days: [
         {
           day: 1,
-          times: [10,10.5,11,11.5] // Mar 10 - 12
+          times: [{itime: 10, ftime: 12}] // Mar 10 - 12
         },
         {
           day: 3,
-          times: [10,10.5,11,11.5] // Jue 10 - 12
+          times: [{itime: 10, ftime: 12}] // Jue 10 - 12
         }
       ]
     },
@@ -69,11 +69,11 @@ export class ClassService {
       class_days: [
         {
           day: 1,
-          times: [18.5,19,19.5,20] // Mar 18.5 - 20.5
+          times: [{itime: 18.5, ftime: 20.5}] // Mar 18:30 - 20:30
         },
         {
           day: 4,
-          times: [18.5,19,19.5,20] // Vie 18.5 - 20.5
+          times: [{itime: 18.5, ftime: 20.5}] // 18:30 - 20:30
         }
       ]
     }

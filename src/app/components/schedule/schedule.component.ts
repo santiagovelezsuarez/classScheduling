@@ -17,7 +17,7 @@ export class ScheduleComponent implements OnInit {
 
   @Input() fTime: number = 20;
 
-  @Input() cellsPerHour = 8;
+  @Input() cellsPerHour = 2;
 
   @Input() iDay: Days = Days.Lun;
 
@@ -102,7 +102,7 @@ export class ScheduleComponent implements OnInit {
 
       }
       if(times.length>0)
-        this.sessions.push({day, times});
+        this.sessions.push({day, times: [{itime: times[0], ftime: times[1]}]});
     }
     this.notify.emit(this.sessions);
   }
@@ -119,11 +119,11 @@ export class ScheduleComponent implements OnInit {
       {
         //console.log(session);
         //this.cells[2][2] = Cell.BUSY;
-        for(let time of session.times)
+        /*for(let time of session.times)
         {
           this.cells[session.day][(time-this.iTime)*this.cellsPerHour].value = Cell.BUSY;
           this.cells[session.day][(time-this.iTime)*this.cellsPerHour].description = desc;
-        }
+        }*/
       }
     }
   }
@@ -134,7 +134,4 @@ export class ScheduleComponent implements OnInit {
     );
     this.notifySessions();
   }
-
-
-
 }

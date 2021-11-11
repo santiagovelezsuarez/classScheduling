@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Class } from 'src/app/models/scheduler.models';
+import { Class, DAY } from 'src/app/models/scheduler.models';
 import { ClassService } from 'src/app/services/class.service';
 import { CourseService } from '../../services/course.service';
 import { TeacherService } from '../../services/teacher.service';
@@ -15,6 +15,8 @@ export class ClassListComponent implements OnInit {
   classes: Class[] = [];
   filter: Class[] = [];
   text: string = "";
+  Day = DAY;
+  Math = Math;
 
   constructor(
     private classService: ClassService,

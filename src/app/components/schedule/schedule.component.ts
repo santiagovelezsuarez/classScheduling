@@ -1,5 +1,5 @@
 import { Component, OnInit, Output,  EventEmitter, Input} from '@angular/core';
-import { Session, Days, Schedule, Cell, DAY, SCell } from '../../models/scheduler.models';
+import { Session, Days, Schedule, Cell, DAY, SCell, timeInterval } from '../../models/scheduler.models';
 
 @Component({
   selector: 'app-schedule',
@@ -90,19 +90,35 @@ export class ScheduleComponent implements OnInit {
     this.sessions = [];
     for(let day=0; day<this.cells.length; day++)
     {
-      //console.log(DAY[day]);
-      let times: number[] = [];
-      for(let time=0; time<this.cells[0].length; time++)
+      let times: timeInterval[] = [];
+      let itime = -1;
+      let ftime = -1;
+      for(let time=0; time<this.cells[day].length; time++)
       {
-        //console.log(this.cells[day][time]);
-        if(this.cells[day][time].value === Cell.FULL)
+        if(this.cells[day][time].value==Cell.FULL && itime==-1)
         {
-          times.push(time/this.cellsPerHour+this.iTime);
+            itime = time + this.iTime;
         }
-
+        if(this.cells[day][time].value!=Cell.FULL)
+        {
+            if(itime!=-1)
+            {
+                ftime = time + this.iTime;
+                itime = (itime + this.iTime) / this.cellsPerHour ;
+                ftime = (ftime + this.iTime) / this.cellsPerHour ;
+                times.push({itime,ftime});
+            }
+            itime = -1;
+            ftime = -1;
+        }
+        if(time==(this.cells[day].length-1) && this.cells[day][time].value==Cell.FULL)
+        {
+            ftime= time + 1 + this.iTime;
+            times.push({itime,ftime});
+        }
       }
       if(times.length>0)
-        this.sessions.push({day, times: [{itime: times[0], ftime: times[1]}]});
+        this.sessions.push({day, times});
     }
     this.notify.emit(this.sessions);
   }
@@ -112,26 +128,63 @@ export class ScheduleComponent implements OnInit {
     this.cleanCells();
     //console.log("Sessions: ");
     for(let schedule of this._schedules)
-    {console.log("_Schedules: ",schedule)
+    {
       let desc = schedule.description;
       let color = schedule.color;
       for(let session of schedule.sessions)
       {
-        //console.log(session);
-        //this.cells[2][2] = Cell.BUSY;
-        /*for(let time of session.times)
+        //console.log("session: ",session);
+        for(let time of session.times)
         {
-          this.cells[session.day][(time-this.iTime)*this.cellsPerHour].value = Cell.BUSY;
-          this.cells[session.day][(time-this.iTime)*this.cellsPerHour].description = desc;
-        }*/
+          //console.log("time:", time);
+          for(let t = ((time.itime - this.iTime) * this.cellsPerHour); t< ((time.ftime - this.iTime) * this.cellsPerHour); t++)
+          {
+            this.cells[session.day][t].value = Cell.BUSY;
+            this.cells[session.day][t].description = desc;
+            this.cells[session.day][t].color = color;
+          }
+        }
       }
     }
   }
 
   cleanCells() {
     this.cells = this.cells.map(
-      cell => cell.map(x => x.value!=Cell.FREE?{value: Cell.FREE, description: ".", color: x.color}:x)
+      cell => cell.map(x => x.value!=Cell.FREE?{value: Cell.FREE, description: ".", color: ""}:x)
     );
     this.notifySessions();
   }
 }
+
+
+/*
+*** Build session times Algorith
+let lunes = [0,1,1,0,0,0,0,0,0,1,1,0,0,1,1,0]; //8-10,16-18,20-23
+let iTime = 7;
+let times = [];
+let itime = -1;
+let ftime = -1;
+for(let i=0; i<lunes.length; i++)
+{
+    if(lunes[i]==1 && itime==-1)
+    {
+        itime = i + iTime;
+    }
+    if(lunes[i]==0)
+    {
+        if(itime!=-1)
+        {
+            ftime= i + iTime;
+            times.push({itime,ftime});
+        }
+        itime = -1;
+        ftime = -1;
+    }
+    if(i==(lunes.length-1) && lunes[i]==1)
+    {
+        ftime= i + 1 + iTime;
+        times.push({itime,ftime});
+    }
+}
+console.log(times);
+*/

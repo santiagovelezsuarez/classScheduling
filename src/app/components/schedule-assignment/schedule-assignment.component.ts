@@ -29,7 +29,7 @@ export class ScheduleAssignmentComponent implements OnInit {
   courses: Course[] = [];
 
   // Classes
-  schedules: Schedule[] = [];
+  //schedules: Schedule[] = [];
 
   classes : Class[] = [];
 
@@ -46,6 +46,7 @@ export class ScheduleAssignmentComponent implements OnInit {
   });
 
   setSessions(sessions: Session[]){
+    //console.log("Sessions: ",sessions);
     this.sessions = sessions;
   }
 
@@ -58,14 +59,14 @@ export class ScheduleAssignmentComponent implements OnInit {
 
   onRoomChange(room)
   {
-    console.log("room");
+    /*console.log("room");
     console.log(room.target.value);
-    console.log(room);
+    console.log(room);*/
     let idate = (<HTMLInputElement>document.getElementById("start_date")).value;
     let fdate = (<HTMLInputElement>document.getElementById("end_date")).value;
     this.classService.getClassesByRoomInDate(room.target.value, new Date(idate), new Date(fdate)).subscribe(
       x => {
-        console.log(x);
+        //console.log(x);
         //this.schedules = this.classToSchedule(x);
         this.classes = x;
       }
@@ -79,7 +80,7 @@ export class ScheduleAssignmentComponent implements OnInit {
     let fdate = (<HTMLInputElement>document.getElementById("end_date")).value;
     this.classService.getClassesByRoomInDate(+room, new Date(idate), new Date(fdate)).subscribe(
       x => {
-        console.log(x);
+        console.log("x: ",x);
         //this.schedules = this.classToSchedule(x);
         this.classes = x;
       }

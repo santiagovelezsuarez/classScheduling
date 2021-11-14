@@ -9,14 +9,16 @@ import { DepartmentService } from '../../services/department.service';
   templateUrl: './form-teacher.component.html',
   styleUrls: ['./form-teacher.component.css']
 })
-export class FormTeacherComponent implements OnInit {
-
+export class FormTeacherComponent implements OnInit
+{
   departments: Department[] = [];
 
-  constructor(
+  constructor
+  (
     private teacherService: TeacherService,
     private departmentService: DepartmentService
-  ) { }
+  )
+  { }
 
   msg: string = '';
 

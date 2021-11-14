@@ -5,6 +5,7 @@ import { ScheduleAssignmentComponent } from './components/schedule-assignment/sc
 import { FormCourseComponent } from './components/form-course/form-course.component';
 import { FormRoomComponent } from './components/form-room/form-room.component';
 import { FormTeacherComponent } from './components/form-teacher/form-teacher.component';
+import { UpdateCourseComponent } from './components/update-course/update-course.component';
 
 const routes: Routes = [
   { path: '', component: ScheduleAssignmentComponent },
@@ -12,7 +13,8 @@ const routes: Routes = [
   { path: 'reservate-room', component: ScheduleAssignmentComponent },
   { path: 'create-course', component: FormCourseComponent },
   { path: 'create-room', component: FormRoomComponent },
-  { path: 'create-teacher', component: FormTeacherComponent }
+  { path: 'create-teacher', component: FormTeacherComponent },
+  { path: 'update-course/:id', component: UpdateCourseComponent }
 ];
 
 @NgModule({

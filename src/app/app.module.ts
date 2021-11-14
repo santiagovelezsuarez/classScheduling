@@ -16,7 +16,7 @@ import { CourseListComponent } from './components/course-list/course-list.compon
 import { ClassToSchedulePipe } from './pipes/class-to-schedule.pipe';
 import { ClassDayToStringPipe } from './pipes/class-day-to-string.pipe';
 import { EnumToArrayPipe } from './pipes/enum-to-array.pipe';
-
+import { UpdateCourseComponent } from './components/update-course/update-course.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +31,7 @@ import { EnumToArrayPipe } from './pipes/enum-to-array.pipe';
     ClassToSchedulePipe,
     ClassDayToStringPipe,
     EnumToArrayPipe,
+    UpdateCourseComponent,
 
   ],
   imports: [
@@ -38,7 +39,8 @@ import { EnumToArrayPipe } from './pipes/enum-to-array.pipe';
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

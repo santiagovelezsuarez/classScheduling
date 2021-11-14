@@ -17,6 +17,7 @@
         <td *ngFor="let day of cells; let i = index"
             (click)="onCellClick(i, j)"
             [ngClass]="{mkb: cells[i][j].value==Cell.BUSY, mk: cells[i][j].value==Cell.FULL}"
+            [ngStyle]="{ 'background-color': cells[i][j].color }"
         >
           {{ cells[i][j].description }}
         </td>
@@ -38,9 +39,9 @@
   </table>
 </div>
 
-<h1>Sessions: </h1>
-<div>
-  <ul>
-    <li *ngFor="let session of sessions">{{ session.day }} - {{ session.times }}</li>
-  </ul>
-</div>
+<ul>
+  <li *ngFor="let session of sessions">
+    Day: {{ session.day }} :
+    <p *ngFor="let t of session.times">{{t | json}}</p>
+  </li>
+</ul>

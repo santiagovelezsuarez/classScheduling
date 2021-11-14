@@ -127,25 +127,23 @@ export class ClassService {
 
   overlapDates(ia, fa, ib, fb)
   {
-    /*console.log("ia: ",ia);
-    console.log("ib: ",ib);
-    console.log("fa: ",fa);
-    console.log("fb: ",fb);
-    console.log("ia<=fb: ",ia<=fb);
-    console.log("ia>=fb: ",ia>=fb);*/
+    console.log("iabb: ",ia,fa,ib,fb);
     return ((ia<=fb) && (fa >= ib));
   }
 
   getClassesByRoomInDate(room_id:number, idate:Date, fdate:Date):Observable<Class[]>
   {
-    return of(this.classes.filter(x => (x.room_id == room_id) && !this.overlapDates(idate,fdate,x.start_date,x.end_date)));
+    console.log("idate ",idate);
+    console.log("fdate ",fdate);
+    //this.classes.map(x => console.log("x.start_date: ,",x.start_date));
+    return of(this.classes.filter(x => (x.room_id == room_id) && (this.overlapDates(idate,fdate,x.start_date,x.end_date) || (isNaN(idate.getTime())) || (isNaN(fdate.getTime())) )));
   }
 
   // class to sch ()
 
   classToSchedule(classs: Class): Observable<Schedule>
   {
-    let schedule: Schedule = {sessions: classs.class_days, description: "desc", color: "Coral"};
+    let schedule: Schedule = {sessions: classs.class_days, description: "desc", color: '#FF'+Math.floor(Math.random()*16777215).toString(14)};
     this.courseService.getCourse(classs.course_id).subscribe(rs => schedule.description = rs.name);
     return of(schedule);
   }

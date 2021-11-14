@@ -13,14 +13,16 @@ import { CourseService } from '../../services/course.service';
   templateUrl: './schedule-assignment.component.html',
   styleUrls: ['./schedule-assignment.component.css']
 })
-export class ScheduleAssignmentComponent implements OnInit {
-
-  constructor(
+export class ScheduleAssignmentComponent implements OnInit
+{
+  constructor
+  (
     private classService: ClassService,
     private teacherService: TeacherService,
     private roomInfoService: RoomInfoService,
     private courseService: CourseService
-  ) { }
+  )
+  { }
 
   teachers: Teacher[] = [];
 
@@ -29,7 +31,7 @@ export class ScheduleAssignmentComponent implements OnInit {
   courses: Course[] = [];
 
   // Classes
-  schedules: Schedule[] = [];
+  //schedules: Schedule[] = [];
 
   classes : Class[] = [];
 
@@ -45,7 +47,9 @@ export class ScheduleAssignmentComponent implements OnInit {
     end_date:  new FormControl('',[Validators.required])
   });
 
-  setSessions(sessions: Session[]){
+  setSessions(sessions: Session[])
+  {
+    //console.log("Sessions: ",sessions);
     this.sessions = sessions;
   }
 
@@ -58,14 +62,14 @@ export class ScheduleAssignmentComponent implements OnInit {
 
   onRoomChange(room)
   {
-    console.log("room");
+    /*console.log("room");
     console.log(room.target.value);
-    console.log(room);
+    console.log(room);*/
     let idate = (<HTMLInputElement>document.getElementById("start_date")).value;
     let fdate = (<HTMLInputElement>document.getElementById("end_date")).value;
     this.classService.getClassesByRoomInDate(room.target.value, new Date(idate), new Date(fdate)).subscribe(
       x => {
-        console.log(x);
+        //console.log(x);
         //this.schedules = this.classToSchedule(x);
         this.classes = x;
       }
@@ -79,7 +83,7 @@ export class ScheduleAssignmentComponent implements OnInit {
     let fdate = (<HTMLInputElement>document.getElementById("end_date")).value;
     this.classService.getClassesByRoomInDate(+room, new Date(idate), new Date(fdate)).subscribe(
       x => {
-        console.log(x);
+        console.log("x: ",x);
         //this.schedules = this.classToSchedule(x);
         this.classes = x;
       }
@@ -87,7 +91,8 @@ export class ScheduleAssignmentComponent implements OnInit {
   }
 
 
-  getOptions(){
+  getOptions()
+  {
     this.teacherService.getTeachers().subscribe(rs => this.teachers = rs);
     this.roomInfoService.getRooms().subscribe(rs => this.rooms = rs);
     this.courseService.getCourses().subscribe(rs => this.courses = rs);
@@ -118,7 +123,8 @@ export class ScheduleAssignmentComponent implements OnInit {
     return schedules;
   }*/
 
-  onSubmit(): void{
+  onSubmit(): void
+  {
     console.log("Form sche-assig: ");
     let cl = this.form.value;
     cl.class_days = this.sessions;

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Course } from '../../models/scheduler.models';
 import { CourseService } from '../../services/course.service';
@@ -8,11 +8,14 @@ import { CourseService } from '../../services/course.service';
   templateUrl: './form-course.component.html',
   styleUrls: ['./form-course.component.css']
 })
-export class FormCourseComponent implements OnInit {
+export class FormCourseComponent implements OnInit
+{
 
-  constructor(
+  constructor
+  (
     private courseService: CourseService
-  ) { }
+  )
+  { }
 
   msg: string = '';
 
@@ -20,10 +23,26 @@ export class FormCourseComponent implements OnInit {
     name: new FormControl('',[Validators.required])
   });
 
-  ngOnInit(): void {
+  ngOnInit(): void
+  {
   }
 
-  onSubmit(): void{
+  onSubmit(): void
+  {
+    this.courseService.createCourse(this.formCourse.value).subscribe(
+      ok => {
+        this.formCourse.reset();
+        this.msg = "Curso Registrado Correctamente!";
+      },
+      error => {
+        this.msg = "Error: "+error;
+      }
+    );
+  }
+
+  onClose()
+  {
+    this.msg = '';
   }
 
 }

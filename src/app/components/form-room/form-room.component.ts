@@ -9,16 +9,19 @@ import { BuildingService } from '../../services/building.service';
   templateUrl: './form-room.component.html',
   styleUrls: ['./form-room.component.css']
 })
-export class FormRoomComponent implements OnInit {
+export class FormRoomComponent implements OnInit
+{
 
   RoomType = RoomType;
 
   buildings: Building[] = [];
 
-  constructor(
+  constructor
+  (
     private roomInfoService: RoomInfoService,
     private buildingService: BuildingService
-  ) { }
+  )
+  { }
 
   msg: string = '';
 

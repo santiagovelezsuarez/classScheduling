@@ -10,7 +10,9 @@ import { RoomInfoService } from '../../services/room-info.service';
   templateUrl: './class-list.component.html',
   styleUrls: ['./class-list.component.css']
 })
-export class ClassListComponent implements OnInit {
+
+export class ClassListComponent implements OnInit
+{
 
   classes: Class[] = [];
   filter: Class[] = [];
@@ -18,14 +20,17 @@ export class ClassListComponent implements OnInit {
   Day = DAY;
   Math = Math;
 
-  constructor(
+  constructor
+  (
     private classService: ClassService,
     private courseService: CourseService,
     private teacherService: TeacherService,
     private roomInfoService: RoomInfoService
-  ) { }
+  )
+  { }
 
-  ngOnInit(): void {
+  ngOnInit(): void
+  {
     this.getClasses();
   }
 

@@ -6,9 +6,9 @@ import { Session, Days, Schedule, Cell, DAY, SCell, timeInterval } from '../../m
   templateUrl: './schedule.component.html',
   styleUrls: ['./schedule.component.css']
 })
-export class ScheduleComponent implements OnInit {
 
-
+export class ScheduleComponent implements OnInit
+{
   @Input() readonly: boolean = false;
 
   @Input() horizontal: boolean = true;
@@ -54,7 +54,8 @@ export class ScheduleComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void
+  {
     this.drawSessions();
   }
 
@@ -148,7 +149,8 @@ export class ScheduleComponent implements OnInit {
     }
   }
 
-  cleanCells() {
+  cleanCells()
+  {
     this.cells = this.cells.map(
       cell => cell.map(x => x.value!=Cell.FREE?{value: Cell.FREE, description: ".", color: ""}:x)
     );

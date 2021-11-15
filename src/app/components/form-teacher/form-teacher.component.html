@@ -1,5 +1,20 @@
-<div class="col-6 mt-4">
+<div class="row">
+<div class="col-4 mt-4">
   <h2>Crear Docente</h2>
+  <div
+      *ngIf="msg"
+      class="alert alert-success alert-dismissible fade show"
+      role="alert"
+    >
+      <strong>{{ msg }}</strong>
+      <button
+        type="button"
+        (click)="onClose()"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+      ></button>
+    </div>
   <form [formGroup]="formTeacher" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="name" class="form-label mt-1">Name</label>
@@ -15,7 +30,9 @@
       <button type="submit" class="btn btn-primary mb-3" [disabled]="!formTeacher.valid">Submit</button>
     </div>
   </form>
-  <div *ngIf="msg" class="alert alert-success" role="alert">
-    {{msg}}
-  </div>
+</div>
+<div class="col-6 mt-4">
+  <h2>Lista De Docentes</h2>
+  <app-teacher-list></app-teacher-list>
+</div>
 </div>

@@ -30,8 +30,15 @@ export class TeacherService {
 
   constructor(private httpClient: HttpClient) { }
 
+  private generateId(): number
+  {
+    let current = this.teachers.length;
+    return ++current;
+  }
+
   createTeacher(teacher: Teacher):Observable<Number>
   {
+    teacher.id = this.generateId();
     return of(this.teachers.push(teacher));
   }
 

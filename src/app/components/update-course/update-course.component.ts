@@ -1,3 +1,4 @@
+import { nullSafeIsEquivalent } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -14,13 +15,9 @@ export class UpdateCourseComponent implements OnInit
 {
   course_id: number = 0;
 
-  course: Course;
+  course: Course = null;
 
   msg: string = '';
-
-  formCourse = new FormGroup({
-    name: new FormControl('',[Validators.required])
-  });
 
   constructor
   (
@@ -38,14 +35,14 @@ export class UpdateCourseComponent implements OnInit
     });
   }
 
-  onSubmit(): void
+  save(): void
   {
     this.courseService.updateCourse(this.course).subscribe(x => {
       console.log(x);
       this.msg = "se ha modificado el nombre del curso!";
       setTimeout(() => {
         this.router.navigate(['create-course']);
-      }, 1100);
+      }, 700);
 
     });
   }

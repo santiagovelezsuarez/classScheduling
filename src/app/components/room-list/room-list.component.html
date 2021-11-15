@@ -1,0 +1,31 @@
+<div class="col-8 mt-4">
+  <div class="col-4 mt-2">
+    <input
+      class="form-control form-control-lg sc listmov"
+      type="text"
+      placeholder="Search"
+      [(ngModel)]="text"
+      (keyup)="search()"
+    />
+  </div>
+  <table class="table table-striped table-dark mt-3">
+    <thead>
+      <tr>
+        <td>Id</td>
+        <td>Bloque</td>
+        <td>Nombre</td>
+        <td>Tipo</td>
+        <td>Capacidad</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let room of filter">
+        <td>{{ room.id }}</td>
+        <td>{{ room.building?.name }}</td>
+        <td>{{ room.name }}</td>
+        <td>{{ room.type }}</td>
+        <td>{{ room.capacity }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

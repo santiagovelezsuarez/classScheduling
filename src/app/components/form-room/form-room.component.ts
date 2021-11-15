@@ -44,7 +44,20 @@ export class FormRoomComponent implements OnInit
 
   onSubmit(): void
   {
+    this.roomInfoService.createRoom(this.formRoom.value).subscribe(
+      ok => {
+        this.formRoom.reset();
+        this.msg = "Aula Registrada Correctamente!";
+      },
+      error => {
+        this.msg = "Error: "+error;
+      }
+    );
+  }
 
+  onClose()
+  {
+    this.msg = '';
   }
 
 }

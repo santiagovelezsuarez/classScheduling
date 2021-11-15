@@ -14,7 +14,6 @@
         aria-label="Close"
       ></button>
     </div>
-    <form [formGroup]="formCourse" (ngSubmit)="onSubmit()">
       <div class="form-group">
         <label for="name" class="form-label mt-1">Name</label>
         <input
@@ -22,19 +21,11 @@
           [(ngModel)]="course.name"
           class="form-control"
           id="name"
-          formControlName="name"
           required
         />
       </div>
       <div class="mt-2">
-        <button
-          type="submit"
-          class="btn btn-primary mb-3"
-          [disabled]="!formCourse.valid"
-        >
-          Submit
-        </button>
+        <button class="btn btn-primary mb-3" (click)="save()">save</button>
       </div>
-    </form>
   </div>
 </div>

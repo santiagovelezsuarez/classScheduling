@@ -1,31 +1,75 @@
-<div class="col-6 mt-4">
-  <h2>Crear Aula</h2>
-  <form [formGroup]="formRoom" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="name" class="form-label mt-1">Bloque</label>
-      <select class="form-select" id="building_id" formControlName="building_id">
-        <option *ngFor="let bld of buildings" value="{{bld.id}}">{{bld.name}}</option>
-      </select>
+<div class="row">
+  <div class="col-6 mt-4">
+    <h2>Crear Aula</h2>
+    <div
+      *ngIf="msg"
+      class="alert alert-success alert-dismissible fade show"
+      role="alert"
+    >
+      <strong>{{ msg }}</strong>
+      <button
+        type="button"
+        (click)="onClose()"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+      ></button>
     </div>
-    <div class="form-group">
-      <label for="name" class="form-label mt-1">Nombre</label>
-      <input type="text" class="form-control" id="name" formControlName="name" required>
-    </div>
-    <div class="form-group">
-      <label for="name" class="form-label mt-1">Tipo</label>
-      <select class="form-select" id="type" formControlName="type">
-        <option *ngFor="let rt of RoomType | enumToArray" value="{{rt}}">{{rt}}</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="name" class="form-label mt-1">Capacidad</label>
-      <input type="number" min="1" class="form-control" id="capacity" formControlName="capacity" required>
-    </div>
-    <div class="mt-2">
-      <button type="submit" class="btn btn-primary mb-3" [disabled]="!formRoom.valid">Submit</button>
-    </div>
-  </form>
-  <div *ngIf="msg" class="alert alert-success" role="alert">
-    {{msg}}
+    <form [formGroup]="formRoom" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name" class="form-label mt-1">Bloque</label>
+        <select
+          class="form-select"
+          id="building_id"
+          formControlName="building_id"
+        >
+          <option *ngFor="let bld of buildings" value="{{ bld.id }}">
+            {{ bld.name }}
+          </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="name" class="form-label mt-1">Nombre</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          formControlName="name"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="name" class="form-label mt-1">Tipo</label>
+        <select class="form-select" id="type" formControlName="type">
+          <option *ngFor="let rt of RoomType | enumToArray" value="{{ rt }}">
+            {{ rt }}
+          </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="name" class="form-label mt-1">Capacidad</label>
+        <input
+          type="number"
+          min="1"
+          class="form-control"
+          id="capacity"
+          formControlName="capacity"
+          required
+        />
+      </div>
+      <div class="mt-2">
+        <button
+          type="submit"
+          class="btn btn-primary mb-3"
+          [disabled]="!formRoom.valid"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+  <div class="col-6 mt-4">
+    <h2>Lista De Aulas</h2>
+    <app-room-list></app-room-list>
   </div>
 </div>

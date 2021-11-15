@@ -36,8 +36,15 @@ export class RoomInfoService {
 
   constructor(private httpClient: HttpClient) { }
 
+  generateId(): number
+  {
+    let current = this.rooms.length;
+    return ++current;
+  }
+
   createRoom(room: Room):Observable<Number>
   {
+    room.id = this.generateId();
     return of(this.rooms.push(room));
   }
 

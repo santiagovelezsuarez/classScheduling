@@ -34,11 +34,25 @@ export class FormTeacherComponent implements OnInit
 
   onSubmit(): void
   {
+    this.teacherService.createTeacher(this.formTeacher.value).subscribe(
+      ok => {
+        this.formTeacher.reset();
+        this.msg = "Docente Registrado Correctamente!";
+      },
+      error => {
+        this.msg = "Error: "+error;
+      }
+    );
   }
 
   getDepartments()
   {
     this.departmentService.getDepartments().subscribe(rs => this.departments = rs);
+  }
+
+  onClose()
+  {
+    this.msg = '';
   }
 
 }

@@ -18,6 +18,7 @@ import { ClassDayToStringPipe } from './pipes/class-day-to-string.pipe';
 import { EnumToArrayPipe } from './pipes/enum-to-array.pipe';
 import { UpdateCourseComponent } from './components/update-course/update-course.component';
 import { RoomListComponent } from './components/room-list/room-list.component';
+import { TeacherListComponent } from './components/teacher-list/teacher-list.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { RoomListComponent } from './components/room-list/room-list.component';
     EnumToArrayPipe,
     UpdateCourseComponent,
     RoomListComponent,
+    TeacherListComponent,
 
   ],
   imports: [

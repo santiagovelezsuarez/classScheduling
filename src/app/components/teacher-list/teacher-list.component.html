@@ -1,0 +1,28 @@
+<div class="col-8 mt-4">
+  <div class="col-4 mt-2">
+    <input
+      class="form-control form-control-lg sc listmov"
+      type="text"
+      placeholder="Search"
+      [(ngModel)]="text"
+      (keyup)="search()"
+    />
+  </div>
+  <table class="table table-striped table-dark mt-3">
+    <thead>
+      <tr>
+        <td>Id</td>
+        <td>Nombre</td>
+        <td>Departamento</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let teacher of filter">
+        <td>{{ teacher.id }}</td>
+        <td>{{ teacher.name }}</td>
+        <td>{{ teacher.department?.name }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+

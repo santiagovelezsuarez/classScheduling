@@ -11,7 +11,7 @@ export class ScheduleComponent implements OnInit
 {
   @Input() readonly: boolean = false;
 
-  @Input() horizontal: boolean = true;
+  @Input() horizontal: boolean = false;
 
   @Input() iTime: number = 8;
 

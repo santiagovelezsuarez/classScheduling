@@ -9,7 +9,6 @@ describe('TeacherService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [],
       imports: [HttpClientTestingModule],
     });
     service = TestBed.inject(TeacherService);

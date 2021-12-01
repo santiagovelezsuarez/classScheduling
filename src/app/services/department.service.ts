@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { Department } from '../models/scheduler.models';
 
@@ -8,7 +8,7 @@ import { Department } from '../models/scheduler.models';
 })
 export class DepartmentService {
 
-  endpoint:string = 'https://api';
+  endpoint:string = 'https://uam.jdcorrea.me/movies/web/scheduler/';
 
   departments: Department[] = [
     {
@@ -29,21 +29,30 @@ export class DepartmentService {
     private httpClient: HttpClient
   ) { }
 
-  generateId(): number
+  private generateId(): number
   {
     let current = this.departments.length;
     return ++current;
   }
 
-  createDepartment(department: Department):Observable<Number>
+  // createDepartment(department: Department):Observable<Number>
+  // {
+  //   department.id = this.generateId();
+  //   return of(this.departments.push(department));
+  // }
+
+  createDepartment(department: Department):Observable<Department>
   {
-    department.id = this.generateId();
-    return of(this.departments.push(department));
+    return this.httpClient.post<Department>(this.endpoint+"departments", department);
   }
 
   getDepartments():Observable<Department[]>
   {
-    return of(this.departments);
+    let headers = new HttpHeaders();
+    headers.append('Accept', 'application/json');
+    headers.append('Content-Type', 'application/json');
+
+    return this.httpClient.get<Department[]>(this.endpoint+"department",{ headers });
   }
 
   getDepartment(id:number):Observable<Department>
